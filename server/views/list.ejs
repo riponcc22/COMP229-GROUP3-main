@@ -1,0 +1,77 @@
+<!-- 
+GROUP 3 PROJECT
+Date: 11-12-2023
+ -->
+ <%- include partials/header.ejs %>
+
+ <%- include partials/main_nav.ejs %>
+
+        <main class="container">
+            <div class="row">
+                <div class="offset-md-offset-3 col-md-12">
+                    <h1><%= title %></h1>
+                    <style>
+                        body {
+                          background-image: url('Assets/images/incident2.png');
+                          background-size: cover;
+                        }                    
+                      </style>
+                      <% if(typeof displayName == 'string' && displayName) { %>
+                    <br>
+                  <div class="text-center">
+                    <a href="/data/add" class="btn btn-primary" role="button">
+                        <i class="fas fa-plus-circle"></i> Add Survey
+                        <% } %>
+                    </a>
+                        </div>
+                    <br>
+                    <table class="table table-bordered table-striped table-hover">
+                       <!-- Header Row -->
+                        <tr class="d-flex">
+                            <% if(typeof displayName == 'string' && displayName) { %>
+                            <th class="text-center col-3">Incident</th>
+                            <th class="text-center col-2">Description</th>
+                            <th class="text-center col-3">Date</th>                           
+                            <th class="text-center col-2"></th>
+                             <th class="text-center col-2"></th>
+                            <% } else {  %>
+                            <th class="text-center col-3">Incident</th>
+                            <th class="text-center col-2">Description</th>
+                            <th class="col-7">Date</th>                                     
+                            <% } %>
+                        </tr>
+       
+                        <!-- Repeatable Template Row -->
+                        <% for(let count=0; count <  productlist.length ; count++)  { %>
+                           <%- console.log("Debug:", productlist[count]) %>
+                            <tr class="d-flex">
+                                <% if(typeof displayName == 'string' && displayName) { %>
+                                <td class="text-center col-3"><%= productlist[count].incident %></td>
+                                <td class="text-center col-2"><%= productlist[count].description %></td>
+                                <td class="text-center col-3"><%= productlist[count].date %></td>                                         
+                               <td class="text-center col-2">
+                                   <a href="/data/edit/<%= productlist[count]._id %>" class="btn btn-primary btn-sm">
+                                   <i class="fas fa-pencil-alt"></i> Edit</a>
+                               </td>
+                               <td class="text-center col-2">
+                                   <a href="/data/delete/<%= productlist[count]._id %>" class="btn btn-danger btn-sm">                              
+                                   <i class="fas fa-trash-alt"></i> Delete</a>
+                               </td>
+                               <% } else { %>
+                                <td class="text-center col-3"><%= productlist[count].incident %></td>
+                                <td class="text-center col-2"><%= productlist[count].description %></td>
+                                <td class="col-7"><%= productlist[count].date %></td>   
+                               <% } %>
+                            </tr>
+                        <% } %>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+
+ 
+   
+ <%- include partials/bottom_nav.ejs %>  
+ 
+ <%- include partials/footer.ejs %>
